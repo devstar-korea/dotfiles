@@ -84,21 +84,36 @@ echo $PATH
 
 ### 빠른 시작
 
+**가장 쉬운 방법 (권장):**
+```bash
+# 1. 대화형 진단으로 오프셋 찾기
+./capcut_timecode_sync.py --interactive --video video.mp4
+
+# 2. 한 번에 보정 + SRT 생성
+./quick_fix.sh script.txt 2.5 output
+# 결과: output_corrected.txt, output_markers.srt
+
+# 3. 캡컷에서 output_markers.srt 불러오기!
+```
+
+**개별 도구 사용:**
 ```bash
 # 비디오 파일 분석
 ./capcut_timecode_sync.py --analyze video.mp4
 
-# 대화형 진단 (권장)
-./capcut_timecode_sync.py --interactive --video video.mp4
-
-# 타임코드 리스트 변환 (3초 오프셋)
+# 타임코드 리스트 변환
 ./capcut_timecode_sync.py --convert script.txt --output corrected.txt --offset-seconds 3.0
+
+# SRT 자막으로 변환 (캡컷용)
+./convert_to_srt.py corrected.txt -o markers.srt
 
 # 도움말
 ./capcut_timecode_sync.py --help
 ```
 
-자세한 사용법은 [캡컷 동기화 가이드](CAPCUT_SYNC_GUIDE.md)를 참고하세요.
+자세한 사용법은:
+- [캡컷 동기화 가이드](CAPCUT_SYNC_GUIDE.md) - 원리와 해결 방법
+- [캡컷 실전 워크플로우](CAPCUT_WORKFLOW.md) - 단계별 편집 방법
 
 ### 필요한 도구
 
