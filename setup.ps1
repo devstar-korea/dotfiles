@@ -36,8 +36,11 @@ if (-not (Test-Path $venvDir)) {
     python -m venv .venv
 
     Write-Host "[3/3] Installing dependencies..." -ForegroundColor Yellow
-    & ".venv\Scripts\pip" install torch==2.3.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu121
-    & ".venv\Scripts\pip" install "numpy<=1.26.4" funasr sounddevice soundfile pyperclip pywin32 keyboard
+    & ".venv\Scripts\pip" install --upgrade pip
+    # Install pre-built torch (auto-detect latest compatible version)
+    & ".venv\Scripts\pip" install torch torchaudio --index-url https://download.pytorch.org/whl/cu121
+    # Install other dependencies
+    & ".venv\Scripts\pip" install numpy funasr sounddevice soundfile pyperclip pywin32 keyboard
     Pop-Location
 } else {
     Write-Host "[3/3] Python venv already exists, skipping..." -ForegroundColor Gray
